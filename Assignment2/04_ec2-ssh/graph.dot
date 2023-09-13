@@ -1,0 +1,54 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] aws_instance.this_my_ec2_instance (expand)" [label = "aws_instance.this_my_ec2_instance", shape = "box"]
+		"[root] aws_internet_gateway.this-igw (expand)" [label = "aws_internet_gateway.this-igw", shape = "box"]
+		"[root] aws_key_pair.loginkey (expand)" [label = "aws_key_pair.loginkey", shape = "box"]
+		"[root] aws_route.this-route-public (expand)" [label = "aws_route.this-route-public", shape = "box"]
+		"[root] aws_route_table.this-RT-public (expand)" [label = "aws_route_table.this-RT-public", shape = "box"]
+		"[root] aws_route_table_association.this-RTAS-public (expand)" [label = "aws_route_table_association.this-RTAS-public", shape = "box"]
+		"[root] aws_security_group.this_my_sg (expand)" [label = "aws_security_group.this_my_sg", shape = "box"]
+		"[root] aws_subnet.this-subnet-public01 (expand)" [label = "aws_subnet.this-subnet-public01", shape = "box"]
+		"[root] aws_vpc.this-vpc (expand)" [label = "aws_vpc.this-vpc", shape = "box"]
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"]" [label = "provider[\"registry.terraform.io/hashicorp/aws\"]", shape = "diamond"]
+		"[root] var.ami_id" [label = "var.ami_id", shape = "note"]
+		"[root] var.availability_zone" [label = "var.availability_zone", shape = "note"]
+		"[root] var.aws_key_name" [label = "var.aws_key_name", shape = "note"]
+		"[root] var.destination_cidr_block" [label = "var.destination_cidr_block", shape = "note"]
+		"[root] var.instance_type" [label = "var.instance_type", shape = "note"]
+		"[root] var.public_subnet_cidr" [label = "var.public_subnet_cidr", shape = "note"]
+		"[root] var.ssh_port" [label = "var.ssh_port", shape = "note"]
+		"[root] var.vpc_cidr_block" [label = "var.vpc_cidr_block", shape = "note"]
+		"[root] aws_instance.this_my_ec2_instance (expand)" -> "[root] aws_key_pair.loginkey (expand)"
+		"[root] aws_instance.this_my_ec2_instance (expand)" -> "[root] var.ami_id"
+		"[root] aws_instance.this_my_ec2_instance (expand)" -> "[root] var.instance_type"
+		"[root] aws_internet_gateway.this-igw (expand)" -> "[root] aws_vpc.this-vpc (expand)"
+		"[root] aws_key_pair.loginkey (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] aws_route.this-route-public (expand)" -> "[root] aws_internet_gateway.this-igw (expand)"
+		"[root] aws_route.this-route-public (expand)" -> "[root] aws_route_table.this-RT-public (expand)"
+		"[root] aws_route.this-route-public (expand)" -> "[root] var.destination_cidr_block"
+		"[root] aws_route_table.this-RT-public (expand)" -> "[root] aws_vpc.this-vpc (expand)"
+		"[root] aws_route_table_association.this-RTAS-public (expand)" -> "[root] aws_route_table.this-RT-public (expand)"
+		"[root] aws_route_table_association.this-RTAS-public (expand)" -> "[root] aws_subnet.this-subnet-public01 (expand)"
+		"[root] aws_security_group.this_my_sg (expand)" -> "[root] aws_vpc.this-vpc (expand)"
+		"[root] aws_security_group.this_my_sg (expand)" -> "[root] var.ssh_port"
+		"[root] aws_subnet.this-subnet-public01 (expand)" -> "[root] aws_vpc.this-vpc (expand)"
+		"[root] aws_subnet.this-subnet-public01 (expand)" -> "[root] var.availability_zone"
+		"[root] aws_subnet.this-subnet-public01 (expand)" -> "[root] var.public_subnet_cidr"
+		"[root] aws_vpc.this-vpc (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] aws_vpc.this-vpc (expand)" -> "[root] var.vpc_cidr_block"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] aws_instance.this_my_ec2_instance (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] aws_route.this-route-public (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] aws_route_table_association.this-RTAS-public (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] aws_security_group.this_my_sg (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] var.aws_key_name"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_instance.this_my_ec2_instance (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_route.this-route-public (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_route_table_association.this-RTAS-public (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_security_group.this_my_sg (expand)"
+		"[root] root" -> "[root] meta.count-boundary (EachMode fixup)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)"
+	}
+}
+
